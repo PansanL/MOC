@@ -1,0 +1,38 @@
+{% extends "Frontend/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="register">
+    <div class="registerTitle">  
+        <h3 ><label class="text-muted"> <img width="60px" height="65px" src="{% static 'vdo/update_2.gif' %}" alt="">&nbsp; ALL FACILITY PROJECT</label></h3>
+    </div>
+
+    <div class="contrainer">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>project Name</th>
+                    <th>Project Owner</th>
+                    <th>Owner Area</th>            
+                </tr>
+            </thead>
+            <tbody>
+                {% for all in allproject %}
+                <tr>
+                    <td>{{all.id}}</td>
+                    <td><a style="text-decoration: none;" href="{% url 'Access_Project' all.id %}">{{all.project_name}}</a></td>  
+                    <td>{{all.project_owner}}</td>
+                    <td>{{all.owner_area}}</td>               
+                </tr>  
+                {% endfor %}   
+            </tbody>                 
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+

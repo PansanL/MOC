@@ -1,0 +1,116 @@
+{% extends "Frontend/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="register">
+    <div class="registerTitle">  
+        <h3 ><small class="text-muted"> <img width="50px" height="50px" src="{% static 'vdo/update.gif' %}" alt="">&nbsp;  Update New File Version </small></h3>
+    </div>
+
+    <div class="contrainer">
+        {% for ML in ML_Fault %}
+        <form action="{% url 'UpdateFileVersion_insert_MLFAULT' ML.id %}" method="post" enctype="multipart/form-data" > 
+            {% csrf_token %}      
+            <div class="input-group mb-3"> 
+                <input class="form-control" type="file" name="UserFile" required > 
+                <button type="submit" class="btn btn-outline-success" >Upload New File Version</button>
+            </div>   
+        </form>
+        {% endfor %}
+    </div>
+
+    
+
+    {% for ML in ML_Fault %}
+    <div class="contrainer">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Document Version</th>
+                    <th>Location and File Name</th>
+                    <th>Action</th>             
+                </tr>
+            </thead>
+
+            <tr>
+                <td><h6>File Version 1</h6></td>
+                <td>{{ML.file}}</td>
+                {% if ML.file != "-" %}
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <a href="{{ML.file.url}}" class="btn btn-outline-dark"  target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><img width="23px" height="23px"  src="{% static 'vdo/download.png/' %}" alt=""></a>
+                    </div>
+                </td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+            </tr>
+
+            <tr>
+                <td><h6>File Version 2</h6></td>
+                <td>{{ML.File_Version2}}</td>
+                {% if ML.File_Version2 != "-" %}
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <a href="{{ML.File_Version2.url}}" class="btn btn-outline-dark"  target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><img width="23px" height="23px"  src="{% static 'vdo/download.png/' %}" alt=""></a>
+                        <a href="{% url 'DeleteMLFAULTFile_Version2' ML.id %}" class="btn btn-outline-dark"  onclick="return confirm('Do yo want to delete ?')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><img width="23px" height="23px"  src="{% static 'vdo/trash.png/' %}" alt=""></a>
+                    </div>
+                </td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td><h6>File Version 3</h6></td>
+                <td>{{ML.File_Version3}}</td>
+                {% if ML.File_Version3 != "-" %}
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <a href="{{ML.File_Version3.url}}" class="btn btn-outline-dark"  target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><img width="23px" height="23px"  src="{% static 'vdo/download.png/' %}" alt=""></a>
+                        <a href="{% url 'DeleteMLFAULTFile_Version3' ML.id %}" class="btn btn-outline-dark"  onclick="return confirm('Do yo want to delete ?')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><img width="23px" height="23px"  src="{% static 'vdo/trash.png/' %}" alt=""></a>
+                    </div>
+                </td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+
+            </tr>
+            <tr>
+                <td><h6>File Version 4</h6></td>
+                <td>{{ML.File_Version4}}</td>
+                {% if ML.File_Version4 != "-" %}
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <a href="{{ML.File_Version4.url}}" class="btn btn-outline-dark"  target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><img width="23px" height="23px"  src="{% static 'vdo/download.png/' %}" alt=""></a>
+                        <a href="{% url 'DeleteMLFAULTFile_Version4' ML.id %}" class="btn btn-outline-dark"  onclick="return confirm('Do yo want to delete ?')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><img width="23px" height="23px"  src="{% static 'vdo/trash.png/' %}" alt=""></a>
+                    </div>
+                </td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td><h6>File Version 5</h6></td>
+                <td>{{ML.File_Version5}}</td>
+                {% if ML.File_Version5 != "-" %}
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <a href="{{ML.File_Version5.url}}" class="btn btn-outline-dark"  target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><img width="23px" height="23px"  src="{% static 'vdo/download.png/' %}" alt=""></a>
+                        <a href="{% url 'DeleteMLFAULTFile_Version5' ML.id %}" class="btn btn-outline-dark"  onclick="return confirm('Do yo want to delete ?')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><img width="23px" height="23px"  src="{% static 'vdo/trash.png/' %}" alt=""></a>
+                    </div>
+                </td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+            </tr>
+
+            <tbody>             
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

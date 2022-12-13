@@ -1,0 +1,113 @@
+{% extends "Frontend/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="register">
+    <div class="registerTitle">  
+        <!-- <h2> <i class="fa fa-folder-open" style="font-size:36px"></i> REGISTER YOUR NEW PROJECT</h2> -->
+        <label for=""><h3> <img width="50px" height="50px" src="{% static 'vdo/user.gif/' %}" alt=""> <small class="text-muted">REGISTER YOUR NEW PROJECT</small></h3></label>
+    </div>
+    <div class="contrainer">
+        <form action="{% url 'insertData' %}" method="post" enctype="multipart/form-data" > 
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text">Project Name  &nbsp; &nbsp; &nbsp;</span>
+                <input type="text" class="form-control" name="Project Name" required>
+                
+            </div>
+            <!-- <div class="input-group mb-3">
+                <span class="input-group-text">Work Building &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <input type="text" class="form-control" name="Building" placeholder=" EX. 1, 2, 3, 4, 5" required>
+                <span class="input-group-text"> &nbsp;Specific Areas</span>
+                <input type="text" class="form-control" name="Specific Areas" placeholder=" EX. Admin Office, Eng.1 , Eng.2" required>
+            </div> -->
+            <div class="input-group mb-3">
+                <span class="input-group-text">Work Building &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <select class="form-control" id="inputGroupSelect03" aria-label="Example select with button addon" name="Building" >
+                  <option value="Buliding 1">Inside Building (ภายในอาคาร)</option>
+                  <option value="Buliding 2">Outside Buliding (ภายนอกอาคาร)</option>
+                  <option value="Other">Other Area</option>
+                </select>
+                <span class="input-group-text"> &nbsp;Specific Areas</span>
+                <input type="text" class="form-control" name="Specific Areas" placeholder="EX. Building 1 admin office / TLC / MR1 and MR2 " required>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Objective Project</span>
+                <input type="text" class="form-control" name="Objective Project"  required>
+                <span class="input-group-text">Project Owner</span>
+                <input type="text" class="form-control" name="Project Owner" placeholder=" EX. xxxxx@wdc.com " required>
+            </div>
+
+            <!-- <div class="input-group mb-3">
+                <button class="btn btn-outline-secondary" type="button">Building</button>
+                <select class="form-control" id="inputGroupSelect03" aria-label="Example select with button addon" name="Building" >
+                  <option value="1">Buliding 1 </option>
+                  <option value="2">Buliding 2 </option>
+                  <option value="3">Buliding 3 </option>
+                </select>
+            </div> -->
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Related System &nbsp;&nbsp;</span>
+                <input type="text" class="form-control" name="Related System" placeholder=" EX. Chiled Water, CDA " required>
+                <span class="input-group-text">Owner Area&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <input type="text" class="form-control" name="Owner Area" placeholder=" EX. xxxxx@wdc.com " required>
+            </div>
+            
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Start Project&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <input type="date" class="form-control" name="Start Project" required>
+                <span class="input-group-text">End Project&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <input type="date" class="form-control" name="End Project" required>
+            </div>
+<!-- 
+            <div class="input-group mb-3">
+                <span class="input-group-text">Approver 1</span>
+                <input type="text" class="form-control" name="approver_1" placeholder=" EX. xxxxx@wdc.com ">
+                <span class="input-group-text">Approver 2</span>
+                <input type="text" class="form-control" name="approver_2" placeholder=" EX. xxxxx@wdc.com ">
+                <span class="input-group-text">Approver 3</span>
+                <input type="text" class="form-control" name="approver_3" placeholder=" EX. xxxxx@wdc.com ">
+            </div> -->
+
+    
+            <div>
+                <input class="btn btn-outline-success"  type="submit" onclick="return confirm('Do yo want to submit ?')">
+            </div>          
+
+        </form>
+    </div>
+
+    <div class="contrainer">
+        <h3 class="registerTitle"><small class="text-muted">STATUS OF PROJECT REGISTER</small> </h3><br>
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    {% comment %} <th>ID</th> {% endcomment %}
+                    <th>project Name</th>
+                    <th>Project Owner</th>
+                    <th>Status</th>
+                    <th>Owner Area</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for register in registernewproject %}
+                <tr>
+                    {% comment %} <td>{{register.id}}</td> {% endcomment %}
+                    <td>{{register.project_name}}</td>
+                    <td>{{register.project_owner}}</td>
+                    <td>{{register.status}}</td>
+                    <td>{{register.owner_area}}</td>
+                </tr>
+                {% endfor %}                       
+            </tbody>                 
+        </table>
+    </div>
+<script></script>
+</div>
+
+
+
+{% endblock content %}

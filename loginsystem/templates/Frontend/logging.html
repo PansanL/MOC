@@ -1,0 +1,34 @@
+{% extends "Frontend/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="register">
+
+    <div class="registerTitle">  
+        <h3 ><label class="text-muted"> <img width="50px" height="50px" src="{% static 'vdo/eye-scan.gif' %}" alt="">&nbsp; MOC History Logging </label></h3>
+    </div>
+    
+    <div class="contrainer">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Member ID (Who ?)</th>    
+                    <th>Action (What ?)</th>
+                    <th> Project (Where ?) </th>
+                    <th>Action Time (When ?)</th>            
+                </tr>
+            </thead>
+                {% for log in logging %}
+                <tr>
+                    <td>{{log.Who_Action}}</h6></td>
+                    <td>{{log.Action}}</h6></td>
+                    <td>{{log.Project}}</h6></td>
+                    <td>{{log.Action_Time}}</h6></td>
+                </tr>
+                {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

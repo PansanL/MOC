@@ -1,0 +1,234 @@
+{% extends "Frontend/layout.html" %}
+{% load static %}
+
+
+
+{% block script %}
+<script>
+$(document).ready(function(){
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Building 1', 'Building 2', 'Building 3', 'Building 4', 'Building 5'],
+        datasets: [{
+            label: 'X Axis is Quantity of Project  :  Y Axis is Building ',
+            data: {{qtyproject_list}},
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',   
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(255, 159, 64, 0.6)',   
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 205, 86, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(201, 203, 207, 0.6)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    
+    options: {
+        indexAxis: 'y',
+      }
+});
+
+})
+</script>
+
+<script>
+
+$(document).ready(function(){
+  var ctx = document.getElementById('myChart2').getContext('2d');
+  var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets: [{
+          label: 'X Axis is Month (2022) : Y Axis is Quantity of Project Expired',
+          data: {{month}},
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',   
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(255, 159, 64, 0.6)',   
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 205, 86, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(201, 203, 207, 0.6)'
+            ],
+          borderWidth: 1
+      }]
+  },
+  
+  options: {
+      scales: {
+          y: {
+              beginAtZero: true
+          }
+      }
+  }
+});
+
+})
+
+</script>
+
+<script>
+
+    $(document).ready(function(){
+      var ctx = document.getElementById('myChart3').getContext('2d');
+      var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Solar Rooftop','TR401 Oil Leak','Project 3','Project 4','Project 5','Project 6','Project 7','Project 8','Project 9','Project 10'],
+          datasets: [{
+              label: 'X Axis is Project Name : Y Axis is Quantity of File Expired',
+              data: [{{ExpiredFile_Solar}}, {{ExpiredFile_TR}}],
+              backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',   
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
+              ],
+              borderColor: [
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(255, 159, 64, 0.6)',   
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 205, 86, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(201, 203, 207, 0.6)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+    });
+    
+    })
+    
+</script>
+
+<script>
+
+    $(document).ready(function(){
+      var ctx = document.getElementById('myChart4').getContext('2d');
+      var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Solar Rooftop','TR401 Oil Leak','Project 3','Project 4','Project 5','Project 6','Project 7','Project 8','Project 9','Project 10'],
+          datasets: [{
+              label: 'X Axis is Project Name : Y Axis is Quantity of Awaiting Approval Files',
+              data: [{{Awaiting_Approval_Solar}} , {{Awaiting_Approval_TR}}, {{Awaiting_Approval_ML}}],
+              backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',   
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
+              ],
+              borderColor: [
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(255, 159, 64, 0.6)',   
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 205, 86, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(201, 203, 207, 0.6)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+    });
+    
+    })
+    
+</script>
+
+{% endblock script %}
+
+
+{% block content %}
+
+<div class="register">
+    <div class="registerTitle">  
+        <h2 ><label class="text-muted"> <img width="65px" height="65px" src="{% static 'vdo/bar-chart.gif' %}" alt="">&nbsp; Facility Dashboard </label></h2>
+    </div>
+
+  <div class="contrainer"></div>
+
+  <div class="container overflow-hidden">
+      <div class="row gy-5">
+        <div class="col-6">
+          <div class="p-3 border bg-light"><h6 style="text-align: center;">Quantity of Project (X) and Building (Y)</h6><canvas id="myChart" width="400" height="250"></canvas></div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border bg-light"><h6 style="text-align: center;">Month: 2022 (X) and Quantity of Project Expired (Y)</h6><canvas id="myChart2" width="400" height="250"></canvas></div>
+        </div>
+        <div class="col-6">
+            <div class="p-3 border bg-light"><h6 style="text-align: center;">Project Name (X) and Quantity of File Expired (Y)</h6><canvas id="myChart3" width="400" height="250"></canvas></div>
+        </div>
+        <div class="col-6">
+            <div class="p-3 border bg-light"><h6 style="text-align: center;">Project Name (X) and Quantity of Awaiting Approval File (Y)</h6><canvas id="myChart4" width="400" height="250"></canvas></div>
+        </div>
+      </div>
+  </div>
+
+
+</div>
+
+
+<!-- <div class="register">
+  <div class="contrainer">
+    <canvas id="myChart" width="400" height="200"></canvas>
+  </div>
+</div> -->
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

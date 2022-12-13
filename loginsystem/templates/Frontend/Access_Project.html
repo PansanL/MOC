@@ -1,0 +1,154 @@
+{% extends "Frontend/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="register">
+    
+    <div class="registerTitle">  
+        {% for all in allproject %}
+        <h3 ><label class="text-muted"> <img width="60px" height="65px" src="{% static 'vdo/update_2.gif' %}" alt="">&nbsp; {{all.project_name}}</label></h3> <!--Query project_name-->
+        {% endfor %}
+    </div>
+
+    <div class="contrainer">
+        {% for all in allproject %}
+            <!-- />>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Smart Check Sheet for Substation #1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</ -->
+            {% if all.id == 1 %}
+                <form action="{% url 'insert_file_Solar' %}" method="post" enctype="multipart/form-data" > 
+                    {% csrf_token %}      
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tags&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" class="form-control" name="Tags" required>
+                        <input class="form-control" type="file" name="UserFile" required > 
+                        <button type="submit" class="btn btn-outline-success">Upload File</button>
+                    </div>  
+                </form> 
+            {% endif %}
+            <!-- />>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> As-build drawing P5 package 2 PDF <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</ -->
+            {% if all.id == 2 %}
+                <form action="{% url 'insert_file_Test' %}" method="post" enctype="multipart/form-data" > 
+                    {% csrf_token %}      
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tags&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" class="form-control" name="Tags" required>
+                        <input class="form-control" type="file" name="UserFile" required > 
+                        <button type="submit" class="btn btn-outline-success">Upload File</button>
+                    </div> 
+                </form> 
+            {% endif %}
+            <!-- />>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> DIUDI Improvement <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</ -->
+            {% if all.id == 3 %}
+                <form action="{% url 'insert_file_MLFAULT' %}" method="post" enctype="multipart/form-data" > 
+                    {% csrf_token %}      
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tags&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" class="form-control" name="Tags" required>
+                        <input class="form-control" type="file" name="UserFile" required > 
+                        <button type="submit" class="btn btn-outline-success">Upload File</button>
+                    </div> 
+                </form> 
+            {% endif %}
+            <!-- />>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Smart Check Sheet for Substation #1	 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</ -->
+            {% if all.id == 4 %}
+                <form action="{% url 'insert_file_CheckSheet_Sub1' %}" method="post" enctype="multipart/form-data" > 
+                    {% csrf_token %}      
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tags&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" class="form-control" name="Tags" required>
+                        <input class="form-control" type="file" name="UserFile" required > 
+                        <button type="submit" class="btn btn-outline-success">Upload File</button>
+                    </div> 
+                </form> 
+            {% endif %}
+            
+        {% endfor %}
+    </div>
+
+    <div class="contrainer">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>Tags</th>
+                    <th>Approval</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    <th>Review</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for solar in SolarRoofTop %}
+                <!-- />>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Smart Check Sheet for Substation #1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</ --> 
+                <tr> 
+                    <td>{{solar.file}}</td>
+                    <td>{{solar.tags}}</td>
+                    <td><a href="{% url 'Approve_Solar_File' solar.id %}" type="button" class="btn btn-outline-success" onclick="return confirm('Dear Approver, Do yo want to approve ?')" >Confirm</a></td>
+                    <td>{{solar.status}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <a href="{% url 'DeleteSolarFile' solar.id %}" class="btn btn-outline-dark"  onclick="return confirm('Do yo want to delete ?')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><img width="23px" height="23px"  src="{% static 'vdo/trash.png/' %}" alt=""></a>
+                            <a href="{% url 'UpdateFileVersion' solar.id %}" class="btn btn-outline-dark"  data-bs-toggle="tooltip" data-bs-placement="top" title="More Action"><img width="23px" height="23px"  src="{% static 'vdo/version.png/' %}" alt="" ></a>
+                        </div>
+                    </td>
+                    <td id="Active_CheckSheet_Sub1" style="color: rgb(71, 200, 71); font-weight: bold;">Active</td>
+                </tr>
+                {% endfor %}
+
+                {% for TEST in TestProject_EE %}
+                <!-- />>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> As-build drawing P5 package 2 PDF	 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</ --> 
+                <tr>               
+                    <td>{{TEST.file}}</td>
+                    <td>{{TEST.tags}}</td>
+                    <td><a href="{% url 'Approve_Test_File' TEST.id %}" type="button" class="btn btn-outline-success" onclick="return confirm('Dear Approver, Do yo want to approve ?')" >Confirm</a></td>
+                    <td>{{TEST.status}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <a href="{% url 'DeleteTestFile' TEST.id %}" class="btn btn-outline-dark"  onclick="return confirm('Do yo want to delete ?')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><img width="23px" height="23px"  src="{% static 'vdo/trash.png/' %}" alt=""></a>
+                            <a href="{% url 'UpdateFileVersion_Test' TEST.id %}" class="btn btn-outline-dark"  data-bs-toggle="tooltip" data-bs-placement="top" title="More Action"><img width="23px" height="23px"  src="{% static 'vdo/version.png/' %}" alt="" ></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                {% for ML in ML_Fault %}
+                <!-- />>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> DIUDI Improvement <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</ --> 
+                <tr>               
+                    <td>{{ML.file}}</td>
+                    <td>{{ML.tags}}</td>
+                    <td><a href="{% url 'Approve_MLFAULT_File' ML.id %}" type="button" class="btn btn-outline-success" onclick="return confirm('Dear Approver, Do yo want to approve ?')" >Confirm</a></td>
+                    <td>{{ML.status}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <a href="{% url 'DeleteMLFAULTFile' ML.id %}" class="btn btn-outline-dark"  onclick="return confirm('Do yo want to delete ?')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><img width="23px" height="23px"  src="{% static 'vdo/trash.png/' %}" alt=""></a>
+                            <a href="{% url 'UpdateFileVersion_MLFAULT' ML.id %}" class="btn btn-outline-dark"  data-bs-toggle="tooltip" data-bs-placement="top" title="More Action"><img width="23px" height="23px"  src="{% static 'vdo/version.png/' %}" alt="" ></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                {% for sub1 in CheckSheet_Sub1 %}
+                <!-- />>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Smart Check Sheet for Substation #1	 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</ --> 
+                <tr>               
+                    <td>{{sub1.file}}</td>
+                    <td>{{sub1.tags}}</td>
+                    <td><a href="{% url 'Approve_CheckSheet_Sub1_File' sub1.id %}" type="button" class="btn btn-outline-success" onclick="return confirm('Dear Approver, Do yo want to approve ?')" >Confirm</a></td>
+                    <td>{{sub1.status}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <a href="{% url 'DeleteCheckSheet_Sub1File' sub1.id %}" class="btn btn-outline-dark"  onclick="return confirm('Do yo want to delete ?')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><img width="23px" height="23px"  src="{% static 'vdo/trash.png/' %}" alt=""></a>
+                            <a href="{% url 'UpdateFileVersion_CheckSheet_Sub1' sub1.id %}" class="btn btn-outline-dark"  data-bs-toggle="tooltip" data-bs-placement="top" title="More Action"><img width="23px" height="23px"  src="{% static 'vdo/version.png/' %}" alt="" ></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+
+{% endblock content %}
